@@ -10,21 +10,43 @@
 </head>
 <body> <!-- Creating funcions and importing things --> 
     <py-script>
-    def sum(a, b):
-        result = a + b 
-        return result
+from js import document
+from pyodide import create_proxy
+
+count = 0
+
+def button_click(event):
+	global count
+ 
+	count += 1
+ 
+	document.getElementById("msg").innerHTML = 'Button Clicked ' + str(count)
+
+def setup():
+	# Create a JsProxy for the callback function
+	click_proxy = create_proxy(button_click)
+ 
+	# Set the listener to the callback
+	e = document.getElementById("button")
+	e.addEventListener("click", click_proxy)
+
+setup()
+
+def sum(a, b):
+    result = a + b 
+    return result
         
-    def sub(a, b):
-        result = a - b 
-        return result 
+def sub(a, b):
+    result = a - b 
+    return result 
 
-    def mult(a, b):
-        result = a * b 
-        return result
+def mult(a, b):
+    result = a * b 
+    return result
 
-    def div(a, b):
-        result = a / b 
-        return result
+def div(a, b):
+    result = a / b 
+    return result
 
         
 
